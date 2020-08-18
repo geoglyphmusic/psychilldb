@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+{% block content %}
+	<form class="mt-4" method='POST' action=''>
+		{{ form.hidden_tag() }} <!-- protects from attacks -->
+		<fieldset class='form-group'>
+			<div class="row">
+				<div class="col-sm-6">
+					<legend class='border-bottom mb-4'>Update Account Details</legend>
+					<div class='form-group'>
+						{{ form.username.label(class='form-control-label') }}
+						{% if form.username.errors %}
+							{{ form.username(class='form-control form-control-lg is-invalid') }}
+							<div class='invalid-feedback'>
+								{% for error in form.username.errors %}
+									<span>{{ error }}</span>
+								{% endfor %}
+							</div>
+						{% else %}
+							{{ form.username(class='form-control form-control-lg') }}
+						{% endif %}
+					</div>
+					<div class='form-group'>
+						{{ form.email.label(class='form-control-label') }}		
+						{% if form.email.errors %}
+							{{ form.email(class='form-control form-control-lg is-invalid') }}
+							<div class='invalid-feedback'>
+								{% for error in form.email.errors %}
+									<span>{{ error }}</span>
+								{% endfor %}
+							</div>
+						{% else %}
+							{{ form.email(class='form-control form-control-lg') }}
+						{% endif %}
+					</div>
+					<div class='form-group mt-4'>
+						{{ form.submit(class='btn btn-outline-info') }}
+					</div>
+				</div>
+			</div>
+		</fieldset>
+	</form>
+{% endblock content %}

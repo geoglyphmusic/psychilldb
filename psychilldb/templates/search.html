@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+{% block content %}
+	<h3>Search for an artist, track, tempo, or key:</h3>
+	<form class = "mt-4" method='POST' action="">
+		{{ form.hidden_tag() }} <!-- protects from attacks -->
+		<div class="form-group">
+			<!-- {{ form.search_term.label(class='form-control-label') }} -->
+			{{ form.search_term(class='form-control form-control-lg') }}
+		</div>
+		{{ form.submit(class='btn btn-outline-info') }}
+	</form>
+{% endblock content %}

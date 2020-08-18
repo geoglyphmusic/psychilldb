@@ -1,0 +1,60 @@
+{% extends 'layout.html' %}
+{% block content %}
+	<h1>Welcome to PsychillDB</h1>
+		<div class="card mt-2">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-sm-2">
+						<p>Artist</p>
+					</div>
+					<div class="col-sm-3">
+						<p>Title</p>
+					</div>
+					<div class="col-sm-3">
+						<p>Album</p>
+					</div>
+					<div class="col-sm-1">
+						<p>Year</p>
+					</div>
+					<div class="col-sm-1">
+						<p>Tempo</p>
+					</div>
+					<div class="col-sm-1">
+						<p>Key</p>
+					</div>
+					<div class="col-sm-1">
+						<p>Energy</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	{% for track in tracks %}
+		<div class="card mt-2">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-sm-2">
+						<p>{{ track.artist }}</p>
+					</div>
+					<div class="col-sm-3">
+						<a href="{{ url_for('track', track_id=track.id) }}">{{ track.title }}</a>
+					</div>
+					<div class="col-sm-3">
+						<p>{{ track.album }}</p>
+					</div>
+					<div class="col-sm-1">
+						<p>{{ track.year }}</p>
+					</div>
+					<div class="col-sm-1">
+						<p>{{ track.tempo }}</p>
+					</div>
+					<div class="col-sm-1">
+						<p>{{ track.key }}</p>
+					</div>
+					<div class="col-sm-1">
+						<p>{{ track.energy }}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	{% endfor %}
+{% endblock content %}

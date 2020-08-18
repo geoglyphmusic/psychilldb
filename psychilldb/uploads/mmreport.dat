@@ -1,0 +1,17 @@
+[CustomReport]
+Source=0
+Format=7
+Unicode=0
+Filename=C:\Coding\Websites\psychilldb\List1.xlsx
+Delimiter1="
+Delimiter2=","
+Delimiter3="
+BackCover=False
+Column1=1:|:3:|::|:
+Column2=2:|:2:|::|:
+Column3=3:|:41:|::|:
+Column4=4:|:44:|::|:
+Column5=5:|:7:|::|:
+Column6=6:|:10:|::|:
+Columns=6
+Summary=NNNNNN

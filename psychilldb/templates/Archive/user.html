@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+{% block content %}
+	<h3 class="mt-4">Tracks uploaded by {{ user.username }}</h3>
+	{% for track in user_track_list %}
+		<div class="card mt-2">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-sm-2">
+						<p>{{ track.artist }}</p>
+					</div>
+					<div class="col-sm-3">
+						<a href="{{ url_for('track', track_id=track.id) }}">{{ track.title }}</a>
+					</div>
+					<div class="col-sm-3">
+						<p>{{ track.album }}</p>
+					</div>
+					<div class="col-sm-1">
+						<p>{{ track.year }}</p>
+					</div>
+					<div class="col-sm-1">
+						<p>{{ track.tempo }}</p>
+					</div>
+					<div class="col-sm-1">
+						<p>{{ track.key }}</p>
+					</div>
+					<div class="col-sm-1">
+						<p>{{ track.energy }}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	{% endfor %}
+{% endblock content %}

@@ -1,0 +1,7 @@
+{% extends 'layout.html' %}
+{% block content %}
+	<h1>Welcome to PsyChillDB</h1>
+	<p>This is a track recommendation service for making psychill mixes. If you click on a track name, a list of tracks will be displayed 
+			according to similarity measured in terms of tempo, key, energy, and year.	You can <a href="{{ url_for("search") }}">search</a> 
+			the database according to these criteria, or make a <a href="{{ url_for("contribute") }}">contribution</a> of your own.</p>
+{% endblock content %}

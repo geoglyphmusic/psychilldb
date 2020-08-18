@@ -1,0 +1,59 @@
+{% extends 'layout.html' %}
+{% block content %}
+	<form method='POST' action="">
+		{{ form.hidden_tag() }} <!-- protects from attacks -->
+		<div class="row">
+			<div class="col-sm-5">
+				<div class="form-group">
+					{{ form.artist.label(class='form-control-label') }}
+					{{ form.artist(class='form-control form-control-lg') }}
+				</div>
+			</div>
+			<div class="col-sm-5">
+				<div class="form-group">
+					{{ form.album.label(class='form-control-label') }}
+					{{ form.album(class='form-control form-control-lg') }}
+				</div>
+			</div>
+			<div class="col-sm-2">
+				<div class="form-group">
+					{{ form.year.label(class='form-control-label') }}
+					{{ form.year(class='form-control form-control-lg') }}
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-5">
+				<div class="form-group">
+					{{ form.title.label(class='form-control-label') }}
+					{{ form.title(class='form-control form-control-lg') }}
+				</div>
+			</div>
+			<div class="col-sm-2">
+				<div class="form-group">
+					{{ form.key.label(class='form-control-label') }}
+					{{ form.key(class='form-control form-control-lg') }}
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<div class="form-group">
+					{{ form.mode.label(class='form-control-label') }}
+					{{ form.mode(class='form-control form-control-lg') }}
+				</div>
+			</div>
+			<div class="col-sm-1">
+				<div class="form-group">
+					{{ form.tempo.label(class='form-control-label') }}
+					{{ form.tempo(class='form-control form-control-lg') }}
+				</div>
+			</div>
+			<div class="col-sm-1">
+				<div class="form-group">
+					{{ form.energy.label(class='form-control-label') }}
+					{{ form.energy(class='form-control form-control-lg') }}
+				</div>
+			</div>
+		</div>
+		{{ form.submit(class='btn btn-outline-info') }}
+	</form>
+{% endblock content %}

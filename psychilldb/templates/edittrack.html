@@ -1,0 +1,81 @@
+{% extends 'layout.html' %}
+{% block content %}
+	<h3>Edit Track</h3>
+	<form method='POST' action="" class="mt-4">
+		{{ form.hidden_tag() }} <!-- protects from attacks -->
+		<div class="row">
+			<div class="col-sm-5">
+				<div class="form-group">
+					{{ form.artist.label(class='form-control-label') }}
+					{{ form.artist(class='form-control form-control-lg') }}
+				</div>
+			</div>
+			<div class="col-sm-5">
+				<div class="form-group">
+					{{ form.album.label(class='form-control-label') }}
+					{{ form.album(class='form-control form-control-lg') }}
+				</div>
+			</div>
+			<div class="col-sm-2">
+				<div class="form-group">
+					{{ form.year.label(class='form-control-label') }}
+					{{ form.year(class='form-control form-control-lg') }}
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-5">
+				<div class="form-group">
+					{{ form.title.label(class='form-control-label') }}
+					{{ form.title(class='form-control form-control-lg') }}
+				</div>
+			</div>
+			<div class="col-sm-2">
+				<div class="form-group">
+					{{ form.key.label(class='form-control-label') }}
+					{{ form.key(class='form-control form-control-lg') }}
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<div class="form-group">
+					{{ form.mode.label(class='form-control-label') }}
+					{{ form.mode(class='form-control form-control-lg') }}
+				</div>
+			</div>
+			<div class="col-sm-1">
+				<div class="form-group">
+					{{ form.tempo.label(class='form-control-label') }}
+					{{ form.tempo(class='form-control form-control-lg') }}
+				</div>
+			</div>
+			<div class="col-sm-1">
+				<div class="form-group">
+					{{ form.energy.label(class='form-control-label') }}
+					{{ form.energy(class='form-control form-control-lg') }}
+				</div>
+			</div>
+		</div>
+		{{ form.submit(class='btn btn-outline-info mt-4') }}
+	</form>
+	<button href="#" class="btn btn-danger mt-4" data-toggle="modal" data-target="#deleteModal">Delete</button>
+	
+	<!-- Modal -->
+	<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<h5 class="modal-title" id="deleteModalLabel">Are you sure you want to delete {{ track.title }}?</h5>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			  <span aria-hidden="true">&times;</span>
+			</button>
+		  </div>
+		  <div class="modal-footer">
+			<form action="{{ url_for('delete_track', track_id=track.id) }}" method="POST">
+				<input class="btn btn-danger" type="submit" value="Delete">
+			</form>
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+		  </div>
+		</div>
+	  </div>
+	</div>
+{% endblock content %}
