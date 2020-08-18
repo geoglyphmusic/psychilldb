@@ -91,7 +91,7 @@ def updatepassword():
 			flash('Your account has been updated.', 'success')
 			return redirect(url_for('account'))
 		else:
-			flash('The old password is incorrect. Please try again.', 'danger')
+			flash('The previous password is incorrect. Please try again.', 'danger')
 	return render_template('updatepassword.html', title='Update Password', form=form, nav=True)
 
 
