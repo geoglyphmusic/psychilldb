@@ -1,6 +1,9 @@
 {% extends 'layout.html' %}
 {% block content %}
 	<h3 class="mt-4">Upload a .ods file here</h3>
+	<p>The file must have the following columns: Artist, Album, Track, Year, Tempo, Key, Energy. 
+	The key must be in the following format: A Minor, C Major, C#/Db Minor, A#/Bb Major. (The capital M is important.)
+	The first row is a title row and will be ignored. If you're having problems, send the file to psychilldb@gmail.com and I'll sort it out for you!</p>
 		<form method="POST" action="" enctype="multipart/form-data">
 			{{ form.hidden_tag() }}
 			{{ form.file(class="form-control-file mt-4") }}
