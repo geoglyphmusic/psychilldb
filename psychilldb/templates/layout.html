@@ -25,37 +25,42 @@
 	<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
 		<div class="container">
 			<a class="navbar-brand" href="{{ url_for("home") }}">PsyChillDB</a>
-			<ul class="navbar-nav">
-				<li class="nav-item">
-					<a class="nav-link {{ 'active' if title == 'Search' else '' }}" href="{{ url_for("search") }}">Search</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link {{ 'active' if title == 'About' else '' }}" href="{{ url_for("about") }}">About</a>
-				</li>
-				
-				{% if current_user.is_authenticated %}
-					<li class="nav-item">
-						<a class="nav-link {{ 'active' if title == 'Contribute' else '' }}" href="{{ url_for("contribute") }}">Contribute</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link {{ 'active' if title == 'Batch Upload' else '' }}" href="{{ url_for("batchupload") }}">Batch Upload</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link {{ 'active' if title == 'Account' else '' }}" href="{{ url_for("account") }}">{{ current_user.username }}</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link {{ 'active' if title == 'Logout' else '' }}" href="{{ url_for("logout") }}">Logout</a>
-					</li>
-				{% else %}
-					<li class="nav-item">
-						<a class="nav-link {{ 'active' if title == 'Register' else '' }}" href="{{ url_for("register") }}">Register</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link {{ 'active' if title == 'Login' else '' }}" href="{{ url_for("login") }}">Login</a>
-					</li>
-					
-				{% endif %}
-			</ul>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+			<span class="navbar-toggler-icon"></span>
+				</button>
+			<div class="collapse navbar-collapse" id="collapsibleNavbar">
+    			<ul class="navbar-nav">
+    				<li class="nav-item">
+    					<a class="nav-link {{ 'active' if title == 'Search' else '' }}" href="{{ url_for("search") }}">Search</a>
+    				</li>
+    				<li class="nav-item">
+    					<a class="nav-link {{ 'active' if title == 'About' else '' }}" href="{{ url_for("about") }}">About</a>
+    				</li>
+
+    				{% if current_user.is_authenticated %}
+    					<li class="nav-item">
+    						<a class="nav-link {{ 'active' if title == 'Contribute' else '' }}" href="{{ url_for("contribute") }}">Contribute</a>
+    					</li>
+    					<li class="nav-item">
+    						<a class="nav-link {{ 'active' if title == 'Batch Upload' else '' }}" href="{{ url_for("batchupload") }}">Batch Upload</a>
+    					</li>
+    					<li class="nav-item">
+    						<a class="nav-link {{ 'active' if title == 'Account' else '' }}" href="{{ url_for("account") }}">{{ current_user.username }}</a>
+    					</li>
+    					<li class="nav-item">
+    						<a class="nav-link {{ 'active' if title == 'Logout' else '' }}" href="{{ url_for("logout") }}">Logout</a>
+    					</li>
+    				{% else %}
+    					<li class="nav-item">
+    						<a class="nav-link {{ 'active' if title == 'Register' else '' }}" href="{{ url_for("register") }}">Register</a>
+    					</li>
+    					<li class="nav-item">
+    						<a class="nav-link {{ 'active' if title == 'Login' else '' }}" href="{{ url_for("login") }}">Login</a>
+    					</li>
+
+    				{% endif %}
+    			</ul>
+    		</div>
 		</div>
 	</nav>
 	{% endif %}
