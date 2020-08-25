@@ -183,7 +183,7 @@ def edit_track(track_id):
 		track.energy = form.energy.data
 		db.session.commit()
 		flash(track.title + ' by ' + track.artist + ' was updated.', 'success')
-		return redirect(url_for('user_contributions', username=current_user.username))
+		return redirect(url_for('my_contributions', username=current_user.username))
 	return render_template('edittrack.html', title='Edit Track ' + str(track_id), form=form, track=track, nav=True)
 
 
