@@ -4,3 +4,4 @@ psychilldb/uploads/
 psychilldb/psychilldb.db
 __pycache__/
 .pyc
+.ods
