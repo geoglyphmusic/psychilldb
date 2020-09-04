@@ -1,6 +1,5 @@
 .env
 psychilldb/psychilldb.db
-Archive/
 psychilldb/uploads/
 psychilldb/psychilldb.db
 __pycache__/
