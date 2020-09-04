@@ -20,6 +20,14 @@ def home():
 def about():
     return render_template('about.html', title='About', nav=True)
 
+def send_registration_email(user):
+	msg = Message('Account Created',
+				sender='psychilldb@gmail.com',
+				recipients=[user.email])
+	msg.body = f'''Thanks for making an account with PsyChillDB. If you have any questions, feel free to email me at geoglyphmusic@gmail.com. You can login here: geoglyph.pythonanywhere.com/login.
+G
+	'''
+	mail.send(msg)
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
@@ -31,11 +39,12 @@ def register():
 		user = User(username=form.username.data, email=form.email.data, password=hashed_password)
 		db.session.add(user)
 		db.session.commit()
+		send_registration_email(user)
 		flash(f'Account created for {form.username.data}.', 'success')
 		return redirect(url_for('login'))
 	return render_template('register.html', title='Register', form=form, nav=True)
-	
-	
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
 	if current_user.is_authenticated:
@@ -133,7 +142,7 @@ def batchupload():
 			elif Track.query.filter_by(artist=item[0], album=item[1], title=item[2]).first():# Checks whether item is already in the database
 				flash(str(item[0]) + ' - ' + str(item[2]) + ' is already in the database.', 'danger')
 			else:
-				track = Track(artist=str(item[0]), album=str(item[1]), title=str(item[2]), year=item[3], tempo=item[4], 
+				track = Track(artist=str(item[0]), album=str(item[1]), title=str(item[2]), year=item[3], tempo=item[4],
 							key=item[5], energy=item[6], contributor=current_user)
 				if track.tempo >= 130:
 					track.tempo = track.tempo/2
@@ -154,7 +163,7 @@ def track(track_id):
 	similarity_recommendations = []
 	for item in recommendations:
 		item_with_similarity = {'id': item.id, 'title': item.title, 'album': item.album, 'artist': item.artist, 'tempo': item.tempo,
-			'year': item.year, 'key': item.key, 'energy': item.energy, 
+			'year': item.year, 'key': item.key, 'energy': item.energy,
 			'similarity': similarity(item.energy, item.key, currenttrack.energy, currenttrack.key)}
 		similarity_recommendations.append(item_with_similarity)
 	ordered_recommendations = sorted(similarity_recommendations, key=itemgetter('similarity'))
@@ -206,8 +215,8 @@ def user(username):
 	user = User.query.filter_by(username=username).first()
 	user_track_list = Track.query.filter_by(user_id=user.id).paginate(page=page, per_page=10)
 	return render_template('user.html', title='User: ' + username, user=user, user_track_list=user_track_list, nav=True)
-	
-	
+
+
 @app.route('/my_contributions/<string:username>')
 @login_required
 def my_contributions(username):
@@ -218,8 +227,8 @@ def my_contributions(username):
 		abort(403)
 	user_track_list = Track.query.filter_by(user_id=user.id).paginate(page=page, per_page=10)
 	return render_template('my_contributions.html', title='My Contributions', user=user, user_track_list=user_track_list, edit=True, nav=True)
-		
-	
+
+
 @app.route('/search', methods=['GET', 'POST'])
 def search():
 	form = SearchForm()
@@ -242,8 +251,8 @@ def searchresults(search_term):
 
 def send_reset_email(user):
 	token = user.get_reset_token()
-	msg = Message('Password Reset Request', 
-							sender='psychilldb@gmail.com', 
+	msg = Message('Password Reset Request',
+							sender='psychilldb@gmail.com',
 							recipients=[user.email])
 	msg.body = f'''To reset your password, visit the following link:
 {url_for('reset_token', token=token, _external=True)}
@@ -263,7 +272,7 @@ def reset_request():
 		flash('An email has been sent to your email address', 'success')
 		return redirect(url_for('login'))
 	return render_template('reset_request.html', title='Reset Password', form=form, nav=True)
-	
+
 @app.route('/reset_password/<token>', methods=['GET', 'POST'])
 def reset_token(token):
 	if current_user.is_authenticated:
@@ -284,11 +293,11 @@ def reset_token(token):
 @app.errorhandler(404)
 def error_404(e):
 	return render_template('404.html', nav=True), 404
-	
+
 @app.errorhandler(403)
 def error_403(e):
 	return render_template('403.html', nav=True), 403
-	
+
 @app.errorhandler(500)
 def error_500(e):
 	return render_template('500.html', nav=True), 500
