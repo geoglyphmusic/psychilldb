@@ -156,6 +156,7 @@ def batchupload():
 @app.route("/track/<int:track_id>")
 def track(track_id):
 	page = request.args.get('page', 1, type=int)
+	bpm_window = request.args.get('bpm_window', 2, type=int)
 	tracks_per_page = 10
 	currenttrack = Track.query.get_or_404(track_id)
 	recommendations = Track.query.filter(Track.tempo>=(currenttrack.tempo-1), Track.tempo<=(currenttrack.tempo+1), \
