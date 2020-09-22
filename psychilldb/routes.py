@@ -1,5 +1,6 @@
 from flask import request, flash, url_for, render_template, redirect, request, abort
-from psychilldb import app, db, bcrypt, mail
+from flask_admin.contrib.sqla import ModelView
+from psychilldb import app, db, admin, bcrypt, mail
 from psychilldb.models import Track, User
 from psychilldb.forms import (TrackForm, SearchForm, UploadForm, RegistrationForm, LoginForm, UpdateAccountForm, UpdatePasswordForm,
 		RequestResetForm, ResetPasswordForm)
@@ -8,6 +9,15 @@ from pyexcel_ods3 import get_data
 from operator import itemgetter
 from flask_login import login_user, logout_user, current_user, login_required
 from flask_mail import Message
+
+
+class MainModelView(ModelView):
+	def is_accessible(self): #If this returns true, user can see the model. If false, the user can not see the model.
+		return current_user.is_admin
+
+
+admin.add_view(MainModelView(User, db.session))
+admin.add_view(MainModelView(Track, db.session))
 
 
 @app.route('/')
@@ -19,6 +29,7 @@ def home():
 @app.route('/about')
 def about():
     return render_template('about.html', title='About', nav=True)
+
 
 def send_registration_email(user):
 	msg = Message('Account Created',

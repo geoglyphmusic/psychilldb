@@ -12,12 +12,14 @@ class User(db.Model, UserMixin):
 	username = db.Column(db.String(120), unique=False, nullable=False)
 	email = db.Column(db.String(120), unique=False, nullable=False)
 	password = db.Column(db.String(60), nullable=False)
+	is_admin = db.Column(db.Boolean, default=False, nullable=False)
 	tracks = db.relationship('Track', backref='contributor', lazy=True)# 'lazy=True' means that SQL will load all the tracks by that user in one go when requested
+
 
 	def get_reset_token(self, expires_sec=1800):
 		s = Serializer(app.config['SECRET_KEY'], expires_sec)
 		return s.dumps({'user_id': self.id}).decode('utf-8')
-	
+
 	@staticmethod
 	def verify_reset_token(token):
 		s = Serializer(app.config['SECRET_KEY'])
@@ -44,5 +46,3 @@ class Track(db.Model):
 
 	def __repr__(self):
 		return f"Track('{self.artist}', '{self.album}', '{self.title}', '{self.year}', '{self.tempo}', '{self.key}', '{self.energy}')"
-
-
