@@ -15,7 +15,6 @@ class MainModelView(ModelView):
 	def is_accessible(self): #If this returns true, user can see the model. If false, the user can not see the model.
 		return current_user.is_admin
 
-
 admin.add_view(MainModelView(User, db.session))
 admin.add_view(MainModelView(Track, db.session))
 
